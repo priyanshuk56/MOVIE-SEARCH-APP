@@ -29,6 +29,20 @@ const MovieSearch = () => {
   // Fetch popular movies on component mount
   useEffect(() => {
     fetchPopularMovies()
+    // Listen for home button clicks
+    const handleGoHome = () => {
+      setQuery("")
+      setMovies([])
+      setShowSearchResults(false)
+      setPage(1)
+      setTotalPages(0)
+    }
+
+    window.addEventListener("goHome", handleGoHome)
+
+    return () => {
+      window.removeEventListener("goHome", handleGoHome)
+    }
   }, [])
 
   const fetchPopularMovies = async () => {
